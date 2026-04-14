@@ -1,256 +1,504 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile Card</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- SF Pro via Apple CDN fallback stack -->
+  <title>Ade Ogunleye — Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #1a1410;
+      --ink-soft: #4a3f35;
+      --cream:    #f5f0e8;
+      --parchment:#ede7d6;
+      --gold:     #b8832a;
+      --gold-lt:  #e8c67a;
+      --rust:     #c14a2f;
+      --card-bg:  #fdfaf4;
+      --shadow:   0 4px 40px rgba(26,20,16,.12), 0 1px 4px rgba(26,20,16,.06);
+      --radius:   18px;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--parchment);
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(184,131,42,.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(193,74,47,.06) 0%, transparent 60%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      font-family: var(--font-body);
+      color: var(--ink);
+    }
+
+    /* ── Card ── */
+    article[data-testid="test-profile-card"] {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 860px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Decorative top bar */
+    article[data-testid="test-profile-card"]::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, var(--rust), var(--gold), var(--gold-lt));
+    }
+
+    /* ── Layout wrapper ── */
+    .card-inner {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+    }
+
+    /* ── Left panel ── */
+    .card-left {
+      background: var(--ink);
+      padding: 2.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-left::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,131,42,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Avatar */
+    figure {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .avatar-ring {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--gold), var(--rust));
+      flex-shrink: 0;
+    }
+
+    img[data-testid="test-user-avatar"] {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 3px solid var(--ink);
+    }
+
+    figcaption {
+      font-size: .7rem;
+      color: rgba(255,255,255,.45);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* Social links */
+    nav[data-testid="test-user-social-links"] {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .social-label {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: .25rem;
+    }
+
+    nav[data-testid="test-user-social-links"] ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    nav[data-testid="test-user-social-links"] a {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 400;
+      padding: .35rem .5rem;
+      border-radius: 6px;
+      transition: background .18s, color .18s;
+    }
+
+    nav[data-testid="test-user-social-links"] a:hover,
+    nav[data-testid="test-user-social-links"] a:focus-visible {
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      outline: 2px solid var(--gold);
+      outline-offset: 1px;
+    }
+
+    .social-icon {
+      width: 16px; height: 16px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Time */
+    .time-block {
+      margin-top: auto;
+    }
+
+    .time-label {
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: .2rem;
+    }
+
+    [data-testid="test-user-time"] {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: .72rem;
+      color: var(--gold-lt);
+      letter-spacing: .04em;
+      word-break: break-all;
+    }
+
+    /* ── Right panel ── */
+    .card-right {
+      padding: 2.5rem 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* Header / Name */
+    header {
+      border-bottom: 1px solid rgba(26,20,16,.08);
+      padding-bottom: 1.25rem;
+    }
+
+    .eyebrow {
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .4rem;
+    }
+
+    [data-testid="test-user-name"] {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--ink);
+      letter-spacing: -.01em;
+    }
+
+    .role-tag {
+      display: inline-block;
+      margin-top: .6rem;
+      background: var(--parchment);
+      border: 1px solid rgba(184,131,42,.3);
+      color: var(--ink-soft);
+      font-size: .72rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .2rem .7rem;
+      border-radius: 20px;
+    }
+
+    /* Bio */
+    [data-testid="test-user-bio"] {
+      font-size: .95rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      font-weight: 300;
+    }
+
+    [data-testid="test-user-bio"] strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* Section titles */
+    .section-title {
+      font-size: .6rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: .65rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(193,74,47,.15);
+    }
+
+    /* Lists — hobbies & dislikes */
+    .list-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    [data-testid="test-user-hobbies"],
+    [data-testid="test-user-dislikes"] {
+      /* sections */
+    }
+
+    [data-testid="test-user-hobbies"] ul,
+    [data-testid="test-user-dislikes"] ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+
+    [data-testid="test-user-hobbies"] li,
+    [data-testid="test-user-dislikes"] li {
+      font-size: .85rem;
+      color: var(--ink-soft);
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      line-height: 1.4;
+    }
+
+    [data-testid="test-user-hobbies"] li::before {
+      content: '♦';
+      color: var(--gold);
+      font-size: .6rem;
+      margin-top: .2rem;
+      flex-shrink: 0;
+    }
+
+    [data-testid="test-user-dislikes"] li::before {
+      content: '✕';
+      color: var(--rust);
+      font-size: .6rem;
+      margin-top: .2rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Focus styles (accessibility) ── */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .card-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .card-left {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .card-left::after { display: none; }
+
+      figure { flex-direction: row; align-items: center; gap: 1rem; }
+
+      figcaption { text-align: left; }
+
+      nav[data-testid="test-user-social-links"] ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .time-block { width: 100%; }
+
+      .card-right {
+        padding: 1.75rem 1.5rem;
+        gap: 1.4rem;
+      }
+
+      [data-testid="test-user-name"] { font-size: 1.6rem; }
+
+      .list-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (min-width: 641px) and (max-width: 840px) {
+      .card-inner { grid-template-columns: 200px 1fr; }
+      .card-left { padding: 2rem 1.25rem; }
+      .avatar-ring { width: 90px; height: 90px; }
+      [data-testid="test-user-name"] { font-size: 1.65rem; }
+    }
   </style>
 </head>
+
 <body>
 
-  <!-- Theme Toggle -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
-    <span class="toggle-icon" id="toggle-icon">
-      <!-- Sun icon (shown in dark mode) -->
-      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="5"/>
-        <line x1="12" y1="1" x2="12" y2="3"/>
-        <line x1="12" y1="21" x2="12" y2="23"/>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-        <line x1="1" y1="12" x2="3" y2="12"/>
-        <line x1="21" y1="12" x2="23" y2="12"/>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-      </svg>
-      <!-- Moon icon (shown in light mode) -->
-      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-      </svg>
-    </span>
-  </button>
+  <article data-testid="test-profile-card" aria-label="User profile card">
 
-  <main class="page-wrapper">
+    <div class="card-inner">
 
-    <article class="profile-card" data-testid="test-profile-card">
+      <!-- ── Left Panel ── -->
+      <div class="card-left">
 
-      <!-- Header: Avatar + Identity -->
-      <header class="card-header">
-        <figure class="avatar-figure">
-          <img
-            data-testid="test-user-avatar"
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Martha&backgroundColor=b6e3f4"
-            alt="Martha Josef — UI UX and Product Designer"
-            class="avatar-img"
-            width="72"
-            height="72"
-          />
+        <!-- Avatar -->
+        <figure>
+          <div class="avatar-ring">
+            <img
+              data-testid="test-user-avatar"
+              src="https://api.dicebear.com/7.x/adventurer/svg?seed=ade&backgroundColor=b6e3f4"
+              alt="Ade Ogunleye — illustrated avatar, smiling person with short hair"
+            />
+          </div>
+          <figcaption>Frontend Wizard</figcaption>
         </figure>
 
-        <div class="identity">
-          <h2 data-testid="test-user-name" class="user-name">Martha Josef</h2>
-          <p class="user-location">
-            <span aria-hidden="true">🇳🇱</span>
-            <span>Los Angeles, United States</span>
-          </p>
-        </div>
-      </header>
+        <!-- Social links -->
+        <nav data-testid="test-user-social-links" aria-label="Social media links">
+          <p class="social-label">Connect</p>
+          <ul>
+            <li>
+              <a data-testid="test-user-social-twitter"
+                 href="https://twitter.com/ade_dev"
+                 target="_blank" rel="noopener noreferrer"
+                 aria-label="Ade on Twitter/X">
+                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.258 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                Twitter / X
+              </a>
+            </li>
+            <li>
+              <a data-testid="test-user-social-github"
+                 href="https://github.com/ade-dev"
+                 target="_blank" rel="noopener noreferrer"
+                 aria-label="Ade on GitHub">
+                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a data-testid="test-user-social-linkedin"
+                 href="https://linkedin.com/in/ade-dev"
+                 target="_blank" rel="noopener noreferrer"
+                 aria-label="Ade on LinkedIn">
+                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                LinkedIn
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-      <!-- Stats Row -->
-      <div class="stats-row" role="list" aria-label="Profile statistics">
-        <div class="stat" role="listitem">
-          <span class="stat-label">Experience</span>
-          <span class="stat-value">2 Years</span>
+        <!-- Epoch time -->
+        <div class="time-block" aria-live="polite" aria-label="Current epoch time in milliseconds">
+          <p class="time-label">Epoch (ms)</p>
+          <p data-testid="test-user-time" id="epoch-time" aria-atomic="true">—</p>
         </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat" role="listitem">
-          <span class="stat-label">Budget</span>
-          <span class="stat-value">3L</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat" role="listitem">
-          <span class="stat-label">Rejected</span>
-          <span class="stat-value">12</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat" role="listitem">
-          <span class="stat-label">Hired</span>
-          <span class="stat-value">10</span>
-        </div>
-      </div>
 
-      <!-- Bio -->
-      <section class="bio-section" aria-label="Biography">
-        <p data-testid="test-user-bio" class="user-bio">
-          Hi, I am Martha Josef. My professional experience is in UI UX &amp; Product Design. I started my career as a Graphic Designer, but gradually developed my skills as a UI UX Designer.
+      </div><!-- /card-left -->
+
+      <!-- ── Right Panel ── -->
+      <div class="card-right">
+
+        <!-- Header / Name -->
+        <header>
+          <p class="eyebrow">Profile</p>
+          <h1 data-testid="test-user-name" aria-label="Ade Ogunleye">Ade Ogunleye</h1>
+          <span class="role-tag" aria-label="Role: Software Developer & ICT Student">Software Developer · ICT Student</span>
+        </header>
+
+        <!-- Bio -->
+        <p data-testid="test-user-bio">
+          Building things that work and look good doing it.
+          <strong>ICT student</strong> at FUTA and indie dev crafting
+          <strong>EduTrack</strong> (a school automation platform) and
+          <strong>SoundCircle</strong> (a music community app).
+          Passionate about clean code, great UX, and the intersection of
+          technology and everyday Nigerian life.
         </p>
-      </section>
 
-      <!-- Skills -->
-      <section class="skills-section" aria-label="Skills">
-        <h3 class="section-label">Skill</h3>
-        <div class="skill-tags" role="list">
-          <span class="skill-tag" role="listitem">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Angular
-          </span>
-          <span class="skill-tag" role="listitem">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            JavaScript
-          </span>
-          <span class="skill-tag" role="listitem">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            UI
-          </span>
-          <button class="view-more-btn" aria-expanded="false" aria-controls="extra-skills">View more</button>
+        <!-- Hobbies & Dislikes -->
+        <div class="list-grid">
+
+          <section data-testid="test-user-hobbies" aria-label="Hobbies and interests">
+            <h2 class="section-title">Interests</h2>
+            <ul>
+              <li>Building side projects</li>
+              <li>Listening to Afrobeats</li>
+              <li>UI/UX design explorations</li>
+              <li>Reading tech blogs</li>
+              <li>Playing chess online</li>
+            </ul>
+          </section>
+
+          <section data-testid="test-user-dislikes" aria-label="Things Ade dislikes">
+            <h2 class="section-title">Dislikes</h2>
+            <ul>
+              <li>Unreadable code</li>
+              <li>Slow internet connections</li>
+              <li>Meetings without agendas</li>
+              <li>Poor error messages</li>
+              <li>Scope creep</li>
+            </ul>
+          </section>
+
         </div>
-        <div id="extra-skills" class="extra-skills hidden" role="list">
-          <span class="skill-tag" role="listitem">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Figma
-          </span>
-          <span class="skill-tag" role="listitem">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            React
-          </span>
-        </div>
-      </section>
 
-      <!-- Hobbies -->
-      <section class="list-section" aria-labelledby="hobbies-heading">
-        <h3 class="section-label" id="hobbies-heading">Hobbies</h3>
-        <ul data-testid="test-user-hobbies" class="pill-list">
-          <li>🎨 Design</li>
-          <li>📷 Photography</li>
-          <li>✈️ Travel</li>
-          <li>📚 Reading</li>
-        </ul>
-      </section>
+      </div><!-- /card-right -->
 
-      <!-- Dislikes -->
-      <section class="list-section" aria-labelledby="dislikes-heading">
-        <h3 class="section-label" id="dislikes-heading">Dislikes</h3>
-        <ul data-testid="test-user-dislikes" class="pill-list dislikes">
-          <li>🚫 Micromanagement</li>
-          <li>⏰ Late meetings</li>
-          <li>🔇 Poor feedback</li>
-        </ul>
-      </section>
+    </div><!-- /card-inner -->
 
-      <!-- Contact Details -->
-      <section class="contact-section" aria-label="Contact details">
-        <h3 class="section-label">Contact Detail</h3>
-        <ul class="contact-list">
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.49 5.49l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>(405) 555-0128</span>
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            <span>jackson.graham@example.com</span>
-          </li>
-        </ul>
-      </section>
+  </article>
 
-      <!-- Social Links -->
-      <nav aria-label="Social media profiles">
-        <h3 class="section-label">Social</h3>
-        <ul data-testid="test-user-social-links" class="social-list">
-          <li>
-            <a
-              data-testid="test-user-social-twitter"
-              href="https://twitter.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Twitter profile"
-              class="social-link"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              Twitter
-            </a>
-          </li>
-          <li>
-            <a
-              data-testid="test-user-social-linkedin"
-              href="https://linkedin.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn profile"
-              class="social-link"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a
-              data-testid="test-user-social-github"
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub profile"
-              class="social-link"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              GitHub
-            </a>
-          </li>
-        </ul>
-      </nav>
+  <script>
+    // Update epoch time every 500ms
+    const timeEl = document.getElementById('epoch-time');
 
-      <!-- Current Epoch Time -->
-      <section class="time-section" aria-label="Current time">
-        <div class="time-badge">
-          <span class="time-label">Current Time (ms)</span>
-          <span
-            data-testid="test-user-time"
-            id="epoch-time"
-            class="time-value"
-            aria-live="polite"
-            aria-atomic="true"
-          >—</span>
-        </div>
-      </section>
+    function updateTime() {
+      timeEl.textContent = Date.now();
+    }
 
-      <!-- Meeting Schedule -->
-      <section class="meeting-section" aria-label="Meeting schedule">
-        <div class="meeting-header">
-          <div>
-            <span class="meeting-meta-label">Date</span>
-            <p class="meeting-meta-value">14 April 2024, IST</p>
-          </div>
-          <div>
-            <span class="meeting-meta-label">Meeting On</span>
-            <p class="meeting-meta-value">Gmeet</p>
-          </div>
-        </div>
-        <div class="timeline">
-          <div class="timeline-item start">
-            <div class="timeline-dot outline"></div>
-            <span>9:00AM</span>
-          </div>
-          <div class="timeline-line" aria-hidden="true"></div>
-          <div class="timeline-item end">
-            <div class="timeline-dot filled"></div>
-            <span>10:30AM</span>
-          </div>
-        </div>
-      </section>
+    updateTime(); // immediate render
+    setInterval(updateTime, 500);
+  </script>
 
-      <!-- CTA -->
-      <footer class="card-footer">
-        <button class="feedback-btn" aria-label="Write a feedback for Martha Josef">
-          Write a Feedback
-        </button>
-      </footer>
-
-    </article>
-  </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
