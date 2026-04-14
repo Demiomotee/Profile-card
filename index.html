@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Card</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- SF Pro via Apple CDN fallback stack -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  </style>
+</head>
+<body>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+    <span class="toggle-icon" id="toggle-icon">
+      <!-- Sun icon (shown in dark mode) -->
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <!-- Moon icon (shown in light mode) -->
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </span>
+  </button>
+
+  <main class="page-wrapper">
+
+    <article class="profile-card" data-testid="test-profile-card">
+
+      <!-- Header: Avatar + Identity -->
+      <header class="card-header">
+        <figure class="avatar-figure">
+          <img
+            data-testid="test-user-avatar"
+            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Martha&backgroundColor=b6e3f4"
+            alt="Martha Josef — UI UX and Product Designer"
+            class="avatar-img"
+            width="72"
+            height="72"
+          />
+        </figure>
+
+        <div class="identity">
+          <h2 data-testid="test-user-name" class="user-name">Martha Josef</h2>
+          <p class="user-location">
+            <span aria-hidden="true">🇳🇱</span>
+            <span>Los Angeles, United States</span>
+          </p>
+        </div>
+      </header>
+
+      <!-- Stats Row -->
+      <div class="stats-row" role="list" aria-label="Profile statistics">
+        <div class="stat" role="listitem">
+          <span class="stat-label">Experience</span>
+          <span class="stat-value">2 Years</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat" role="listitem">
+          <span class="stat-label">Budget</span>
+          <span class="stat-value">3L</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat" role="listitem">
+          <span class="stat-label">Rejected</span>
+          <span class="stat-value">12</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat" role="listitem">
+          <span class="stat-label">Hired</span>
+          <span class="stat-value">10</span>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <section class="bio-section" aria-label="Biography">
+        <p data-testid="test-user-bio" class="user-bio">
+          Hi, I am Martha Josef. My professional experience is in UI UX &amp; Product Design. I started my career as a Graphic Designer, but gradually developed my skills as a UI UX Designer.
+        </p>
+      </section>
+
+      <!-- Skills -->
+      <section class="skills-section" aria-label="Skills">
+        <h3 class="section-label">Skill</h3>
+        <div class="skill-tags" role="list">
+          <span class="skill-tag" role="listitem">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Angular
+          </span>
+          <span class="skill-tag" role="listitem">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            JavaScript
+          </span>
+          <span class="skill-tag" role="listitem">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            UI
+          </span>
+          <button class="view-more-btn" aria-expanded="false" aria-controls="extra-skills">View more</button>
+        </div>
+        <div id="extra-skills" class="extra-skills hidden" role="list">
+          <span class="skill-tag" role="listitem">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Figma
+          </span>
+          <span class="skill-tag" role="listitem">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            React
+          </span>
+        </div>
+      </section>
+
+      <!-- Hobbies -->
+      <section class="list-section" aria-labelledby="hobbies-heading">
+        <h3 class="section-label" id="hobbies-heading">Hobbies</h3>
+        <ul data-testid="test-user-hobbies" class="pill-list">
+          <li>🎨 Design</li>
+          <li>📷 Photography</li>
+          <li>✈️ Travel</li>
+          <li>📚 Reading</li>
+        </ul>
+      </section>
+
+      <!-- Dislikes -->
+      <section class="list-section" aria-labelledby="dislikes-heading">
+        <h3 class="section-label" id="dislikes-heading">Dislikes</h3>
+        <ul data-testid="test-user-dislikes" class="pill-list dislikes">
+          <li>🚫 Micromanagement</li>
+          <li>⏰ Late meetings</li>
+          <li>🔇 Poor feedback</li>
+        </ul>
+      </section>
+
+      <!-- Contact Details -->
+      <section class="contact-section" aria-label="Contact details">
+        <h3 class="section-label">Contact Detail</h3>
+        <ul class="contact-list">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.49 5.49l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>(405) 555-0128</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span>jackson.graham@example.com</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Social Links -->
+      <nav aria-label="Social media profiles">
+        <h3 class="section-label">Social</h3>
+        <ul data-testid="test-user-social-links" class="social-list">
+          <li>
+            <a
+              data-testid="test-user-social-twitter"
+              href="https://twitter.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter profile"
+              class="social-link"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              Twitter
+            </a>
+          </li>
+          <li>
+            <a
+              data-testid="test-user-social-linkedin"
+              href="https://linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              class="social-link"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a
+              data-testid="test-user-social-github"
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              class="social-link"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Current Epoch Time -->
+      <section class="time-section" aria-label="Current time">
+        <div class="time-badge">
+          <span class="time-label">Current Time (ms)</span>
+          <span
+            data-testid="test-user-time"
+            id="epoch-time"
+            class="time-value"
+            aria-live="polite"
+            aria-atomic="true"
+          >—</span>
+        </div>
+      </section>
+
+      <!-- Meeting Schedule -->
+      <section class="meeting-section" aria-label="Meeting schedule">
+        <div class="meeting-header">
+          <div>
+            <span class="meeting-meta-label">Date</span>
+            <p class="meeting-meta-value">14 April 2024, IST</p>
+          </div>
+          <div>
+            <span class="meeting-meta-label">Meeting On</span>
+            <p class="meeting-meta-value">Gmeet</p>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item start">
+            <div class="timeline-dot outline"></div>
+            <span>9:00AM</span>
+          </div>
+          <div class="timeline-line" aria-hidden="true"></div>
+          <div class="timeline-item end">
+            <div class="timeline-dot filled"></div>
+            <span>10:30AM</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <footer class="card-footer">
+        <button class="feedback-btn" aria-label="Write a feedback for Martha Josef">
+          Write a Feedback
+        </button>
+      </footer>
+
+    </article>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
