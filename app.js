@@ -1,92 +1,59 @@
-/* ================================================
-   PROFILE CARD — script.js
-   - Epoch time (ms) update
-   - Light / Dark mode toggle
-   - View more skills toggle
-   ================================================ */
+// ── Epoch time ────────────────────────────────────────────
+const timeEl = document.getElementById('epoch-time');
 
-(function () {
-  "use strict";
+function updateTime() {
+  timeEl.textContent = Date.now();
+}
+updateTime();
+setInterval(updateTime, 500);
 
-  /* ---- Epoch Time ---- */
-  const timeEl = document.getElementById("epoch-time");
 
-  function updateTime() {
-    if (timeEl) {
-      timeEl.textContent = Date.now();
-    }
+// ── Theme toggle ──────────────────────────────────────────
+const html       = document.documentElement;
+const toggleBtn  = document.getElementById('theme-toggle');
+const themeIcon  = document.getElementById('theme-icon');
+const themeLabel = document.getElementById('theme-label');
+
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  if (theme === 'dark') {
+    themeIcon.className    = 'fa-solid fa-sun';
+    themeLabel.textContent = 'Light';
+  } else {
+    themeIcon.className    = 'fa-solid fa-moon';
+    themeLabel.textContent = 'Dark';
   }
+  localStorage.setItem('theme', theme);
+}
 
-  // Set immediately on load, then update every 1000ms
-  updateTime();
-  setInterval(updateTime, 1000);
+// On load: saved preference → system preference → default light
+const saved = localStorage.getItem('theme');
+if (saved) {
+  setTheme(saved);
+} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  setTheme('dark');
+}
 
-  /* ---- Theme Toggle ---- */
-  const html       = document.documentElement;
-  const toggleBtn  = document.getElementById("theme-toggle");
-  const STORAGE_KEY = "profile-card-theme";
+toggleBtn.addEventListener('click', () => {
+  setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
 
-  // Restore saved preference
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved === "dark" || saved === "light") {
-    html.setAttribute("data-theme", saved);
+
+// ── See more / See less ───────────────────────────────────
+const seeMoreBtn = document.getElementById('see-more-btn');
+const bioExtra   = document.getElementById('bio-extra');
+
+seeMoreBtn.addEventListener('click', () => {
+  const isOpen = seeMoreBtn.classList.toggle('open');
+  seeMoreBtn.setAttribute('aria-expanded', isOpen);
+
+  if (isOpen) {
+    bioExtra.removeAttribute('hidden');
+    bioExtra.classList.add('open');
+    seeMoreBtn.childNodes[0].textContent = 'See less ';
+  } else {
+    bioExtra.setAttribute('hidden', '');
+    bioExtra.classList.remove('open');
+    seeMoreBtn.childNodes[0].textContent = 'See more ';
   }
-
-  function getTheme() {
-    return html.getAttribute("data-theme") || "light";
-  }
-
-  function setTheme(theme) {
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem(STORAGE_KEY, theme);
-    // Update aria-label
-    toggleBtn.setAttribute(
-      "aria-label",
-      theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
-    );
-    toggleBtn.setAttribute(
-      "title",
-      theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
-    );
-  }
-
-  if (toggleBtn) {
-    // Set initial label
-    setTheme(getTheme());
-
-    toggleBtn.addEventListener("click", function () {
-      const next = getTheme() === "dark" ? "light" : "dark";
-      setTheme(next);
-    });
-  }
-
-  /* ---- View More Skills ---- */
-  const viewMoreBtn = document.querySelector(".view-more-btn");
-  const extraSkills = document.getElementById("extra-skills");
-
-  if (viewMoreBtn && extraSkills) {
-    viewMoreBtn.addEventListener("click", function () {
-      const isHidden = extraSkills.classList.contains("hidden");
-      if (isHidden) {
-        extraSkills.classList.remove("hidden");
-        viewMoreBtn.textContent = "View less";
-        viewMoreBtn.setAttribute("aria-expanded", "true");
-      } else {
-        extraSkills.classList.add("hidden");
-        viewMoreBtn.textContent = "View more";
-        viewMoreBtn.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
-  /* ---- Feedback Button (demo handler) ---- */
-  const feedbackBtn = document.querySelector(".feedback-btn");
-  if (feedbackBtn) {
-    feedbackBtn.addEventListener("click", function () {
-      feedbackBtn.textContent = "Thanks for your feedback! ✓";
-      feedbackBtn.disabled = true;
-      feedbackBtn.style.opacity = "0.75";
-    });
-  }
-
-})();
+});
