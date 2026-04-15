@@ -1,16 +1,14 @@
-/* ── ADD this new helper class anywhere in the file ── */
 .left-right-content {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
 
-/* ── REPLACE your existing @media (max-width: 620px) block with this ── */
+
 @media (max-width: 620px) {
   body {
     padding: 4.5rem 1rem 1.5rem;
     align-items: flex-start;
-    /* stack the two cards vertically with a gap */
     flex-direction: column;
     gap: 0;
   }
