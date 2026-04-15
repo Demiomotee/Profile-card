@@ -1,50 +1,47 @@
 /* ================================================
-   PROFILE CARD v2 — script.js
+   PROFILE CARD v3 — script.js
 
-   Fixes:
-   1. Epoch timer  — shows Date.now() (ms), not clock time
-   2. Theme toggle — persists across reloads, icon/label swap
-   3. See more     — correctly shows/hides bio-extra span
+   Three features, all fixed:
+   1. Epoch time  — Date.now() in ms, ticks every 500ms
+   2. Theme       — toggle light/dark, persists to localStorage
+   3. See more    — inline expand/collapse of bio-extra span
    ================================================ */
 
 (function () {
   "use strict";
 
-  /* ──────────────────────────────────────────────
-     1. EPOCH TIME
-     Show Date.now() in milliseconds.
-     Update every 500ms so it visibly ticks.
+  /* ── 1. EPOCH TIME ───────────────────────────────
+     Shows raw Date.now() milliseconds.
+     Runs immediately, then every 500ms.
   ─────────────────────────────────────────────── */
   var timeEl = document.getElementById("epoch-time");
 
-  function updateEpoch() {
-    if (timeEl) {
-      timeEl.textContent = Date.now();
-    }
+  function tick() {
+    timeEl.textContent = Date.now();
   }
 
-  // Run immediately so value appears without waiting
-  updateEpoch();
-  setInterval(updateEpoch, 500);
+  if (timeEl) {
+    tick();
+    setInterval(tick, 500);
+  }
 
 
-  /* ──────────────────────────────────────────────
-     2. THEME TOGGLE
-     Reads/writes data-theme on <html>.
-     Persists choice to localStorage.
-     Falls back to system preference on first visit.
+  /* ── 2. THEME TOGGLE ─────────────────────────────
+     Reads data-theme from <html>, flips it on click.
+     Saves preference to localStorage.
+     Sets correct icon + label on every call.
   ─────────────────────────────────────────────── */
   var html       = document.documentElement;
   var toggleBtn  = document.getElementById("theme-toggle");
   var themeIcon  = document.getElementById("theme-icon");
   var themeLabel = document.getElementById("theme-label");
 
-  function applyTheme(theme) {
-    // 1. Set attribute on <html>
-    html.setAttribute("data-theme", theme);
+  function applyTheme(t) {
+    /* 1. Stamp the attribute — CSS vars react to this */
+    html.setAttribute("data-theme", t);
 
-    // 2. Swap icon and label
-    if (theme === "dark") {
+    /* 2. Swap icon & label */
+    if (t === "dark") {
       themeIcon.className    = "fa-solid fa-sun";
       themeLabel.textContent = "Light";
       toggleBtn.setAttribute("aria-label", "Switch to light mode");
@@ -54,60 +51,48 @@
       toggleBtn.setAttribute("aria-label", "Switch to dark mode");
     }
 
-    // 3. Persist
-    try { localStorage.setItem("profile-theme", theme); } catch (e) {}
+    /* 3. Persist */
+    try { localStorage.setItem("pc-theme", t); } catch (_) {}
   }
 
-  // Determine initial theme: saved → system preference → light
-  var savedTheme = null;
-  try { savedTheme = localStorage.getItem("profile-theme"); } catch (e) {}
+  /* Determine startup theme: saved → system pref → light */
+  var saved = null;
+  try { saved = localStorage.getItem("pc-theme"); } catch (_) {}
 
-  if (savedTheme === "dark" || savedTheme === "light") {
-    applyTheme(savedTheme);
-  } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  if (saved === "dark" || saved === "light") {
+    applyTheme(saved);
+  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
     applyTheme("dark");
   } else {
-    applyTheme("light"); // ensure icon/label are in sync even for default
+    applyTheme("light");   /* sets icon/label even for the default */
   }
 
-  // Click handler
   if (toggleBtn) {
     toggleBtn.addEventListener("click", function () {
-      var current = html.getAttribute("data-theme");
-      applyTheme(current === "dark" ? "light" : "dark");
+      applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
     });
   }
 
 
-  /* ──────────────────────────────────────────────
-     3. SEE MORE / SEE LESS
-     Toggles the .bio-extra span visibility.
-     Uses .visible CSS class (display:inline when added).
-     aria-expanded + aria-hidden kept in sync.
+  /* ── 3. SEE MORE / SEE LESS ──────────────────────
+     Toggles .visible on #bio-extra (display:none → inline).
+     Button text changes between "See more" and "See less".
+     aria-expanded and aria-hidden kept in sync.
   ─────────────────────────────────────────────── */
-  var seeMoreBtn = document.getElementById("see-more-btn");
-  var bioExtra   = document.getElementById("bio-extra");
+  var btn      = document.getElementById("see-more-btn");
+  var bioExtra = document.getElementById("bio-extra");
 
-  if (seeMoreBtn && bioExtra) {
-    seeMoreBtn.addEventListener("click", function () {
-      var isOpen = seeMoreBtn.classList.toggle("open");
+  if (btn && bioExtra) {
+    btn.addEventListener("click", function () {
+      var open = bioExtra.classList.toggle("visible");
 
-      if (isOpen) {
-        // Show extra bio text
-        bioExtra.classList.add("visible");
-        bioExtra.removeAttribute("aria-hidden");
-        seeMoreBtn.setAttribute("aria-expanded", "true");
-        // Update button text, keep chevron icon
-        seeMoreBtn.innerHTML = 'See less <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>';
-        seeMoreBtn.classList.add("open"); // re-add since innerHTML wipe removes nothing but let's be safe
-      } else {
-        // Hide extra bio text
-        bioExtra.classList.remove("visible");
-        bioExtra.setAttribute("aria-hidden", "true");
-        seeMoreBtn.setAttribute("aria-expanded", "false");
-        seeMoreBtn.innerHTML = 'See more <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>';
-      }
+      /* sync ARIA */
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      bioExtra.setAttribute("aria-hidden", open ? "false" : "true");
+
+      /* swap label */
+      btn.textContent = open ? "See less" : "See more";
     });
   }
 
-})();
+}());
