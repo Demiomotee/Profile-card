@@ -6,37 +6,41 @@
   <title>Omotola Oluwademilade — Profile</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <!-- Theme Toggle -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
     <i id="theme-icon" class="fa-solid fa-moon" aria-hidden="true"></i>
     <span id="theme-label">Dark</span>
   </button>
 
+  <!-- Profile Card -->
   <article data-testid="test-profile-card" aria-label="User profile card">
     <div class="card-inner">
 
       <!-- ── Left Panel ── -->
-      <div class="card-left">
+      <aside class="card-left">
 
-        <figure>
+        <!-- Avatar -->
+        <figure class="avatar-figure">
           <div class="avatar-ring">
             <img
               data-testid="test-user-avatar"
               id="avatar-img"
-              src="avatar.jpg"
-              alt="Omotola Oluwademilade — profile photo"
+              src="https://api.dicebear.com/7.x/avataaars/svg?seed=Omotola&backgroundColor=b6e3f4"
+              alt="Omotola Oluwademilade — Software Developer and ICT Student"
             />
           </div>
-          <figcaption>Frontend Wizard</figcaption>
+          <figcaption>Frontend wizard</figcaption>
         </figure>
 
+        <!-- Social Links -->
         <nav data-testid="test-user-social-links" aria-label="Social media links">
-          <p class="social-label">Connect</p>
+          <p class="section-eyebrow">Connect</p>
           <ul>
             <li>
               <a data-testid="test-user-social-twitter"
@@ -68,44 +72,56 @@
           </ul>
         </nav>
 
-        <div class="time-block" aria-live="polite" aria-label="Current epoch time in milliseconds">
-          <p class="time-label">Epoch (ms)</p>
-          <p data-testid="test-user-time" id="epoch-time" aria-atomic="true">—</p>
+        <!-- Epoch Time -->
+        <div class="time-block" aria-label="Current epoch time in milliseconds">
+          <div class="time-inner">
+            <i class="fa-regular fa-clock time-icon" aria-hidden="true"></i>
+            <span
+              data-testid="test-user-time"
+              id="epoch-time"
+              aria-live="polite"
+              aria-atomic="true"
+            >—</span>
+          </div>
         </div>
 
-      </div>
+      </aside>
 
       <!-- ── Right Panel ── -->
       <div class="card-right">
 
-        <header>
+        <!-- Header -->
+        <header class="card-header">
           <p class="eyebrow">Profile</p>
           <h1 data-testid="test-user-name">Omotola Oluwademilade</h1>
-          <span class="role-tag">Software Developer · ICT Student</span>
+          <span class="role-tag">Software Developer · Student</span>
         </header>
 
-        <div class="bio-wrap">
-          <p data-testid="test-user-bio">
-            <span class="bio-short">
-              Building things that work and look good doing it.
-              ICT student at FUTA and indie dev with a passion for clean code and great UX.
-            </span>
-            <span class="bio-extra" id="bio-extra" hidden>
+        <!-- Bio -->
+        <section class="bio-section" aria-label="About me">
+          <h2 class="section-title">About me</h2>
+          <p data-testid="test-user-bio" class="bio-text">
+            <span class="bio-short">Building things that work and look good doing it.
+              ICT student at FUTA and indie dev with a passion for clean code and great UX...</span>
+            <span class="bio-extra" id="bio-extra" aria-hidden="true">
               Currently crafting <strong>EduTrack</strong> — a school automation platform for
               primary and secondary schools — and <strong>SoundCircle</strong>, a music community
               app blending streaming, artist channels, and in-app ticketing. Deeply interested in
-              the intersection of technology and everyday Nigerian life, and always looking for
-              the next problem worth solving.
+              the intersection of technology and everyday Nigerian life.
             </span>
           </p>
-          <button class="see-more-btn" id="see-more-btn" aria-expanded="false">
-            See more <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
-        </div>
+          <button
+            class="see-more-btn"
+            id="see-more-btn"
+            aria-expanded="false"
+            aria-controls="bio-extra"
+          >See more <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+        </section>
 
+        <!-- Interests + Dislikes grid -->
         <div class="list-grid">
-          <section data-testid="test-user-hobbies" aria-label="Hobbies and interests">
-            <h2 class="section-title">Interests</h2>
+          <section data-testid="test-user-hobbies" aria-labelledby="hobbies-heading">
+            <h2 class="section-title" id="hobbies-heading">Interests</h2>
             <ul>
               <li>Side projects</li>
               <li>Afrobeats</li>
@@ -115,8 +131,8 @@
             </ul>
           </section>
 
-          <section data-testid="test-user-dislikes" aria-label="Things Omotola dislikes">
-            <h2 class="section-title">Dislikes</h2>
+          <section data-testid="test-user-dislikes" aria-labelledby="dislikes-heading">
+            <h2 class="section-title dislike-title" id="dislikes-heading">Dislikes</h2>
             <ul>
               <li>Unreadable code</li>
               <li>Slow internet</li>
