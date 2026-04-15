@@ -236,7 +236,21 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   transition: background 0.22s, border-color 0.22s, color 0.22s;
 }
 
-.time-block i { font-size: 0.82rem; }
+/* Replace existing .time-block */
+.time-block {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;        /* pushes to bottom */
+  background: var(--time-bg);
+  border: 1px solid var(--time-border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  width: fit-content;
+  color: var(--blue);
+  font-size: 0.8rem;
+  transition: background 0.22s, border-color 0.22s, color 0.22s;
+}
 
 [data-testid="test-user-time"] {
   font-variant-numeric: tabular-nums;
@@ -305,37 +319,45 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   transition: color 0.22s;
 }
 
+.bio-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
 .bio-text {
   font-size: 0.925rem;
   line-height: 1.75;
   color: var(--text-body);
   font-weight: 300;
   transition: color 0.22s;
+  /* Clamp to 3 lines by default */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.bio-text strong {
-  color: var(--text-heading);
-  font-weight: 600;
+/* When expanded — remove clamp, show all text */
+.bio-text.expanded {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
 }
 
 .bio-extra {
-  display: none;
-}
-
-.bio-extra.visible {
-  display: inline;
+  /* always in the DOM, clamp handles visibility */
 }
 
 .see-more-btn {
-  display: inline;
+  display: inline-flex;
+  align-self: flex-start;
   background: none;
   border: none;
   padding: 0;
-  margin-left: 0.15em;
   font-family: var(--sf);
   font-size: 0.925rem;
   font-weight: 500;
-  line-height: 1.75;
   color: var(--blue);
   cursor: pointer;
   -webkit-font-smoothing: antialiased;
@@ -452,48 +474,50 @@ button:focus-visible {
 
   figcaption { font-size: 0.78rem; }
 
-  .left-right-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding-top: 0.5rem;
-  }
+.left-right-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;   /* connect at top, social+time at bottom */
+  padding-top: 0.5rem;
+  min-height: 100%;
+}
 
-  .connect-label {
-    font-size: 0.72rem;
-    margin-bottom: 0.6rem;
-  }
+nav[data-testid="test-user-social-links"] {
+  margin-bottom: 0;
+}
 
-  nav[data-testid="test-user-social-links"] {
-    margin-bottom: 0;
-  }
+nav[data-testid="test-user-social-links"] ul {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0;
+  align-items: center;
+}
 
-  nav[data-testid="test-user-social-links"] ul {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 0;
-    align-items: center;
-  }
+nav[data-testid="test-user-social-links"] a {
+  font-size: 0.85rem;
+  padding: 0.35rem 0;
+  gap: 0.35rem;
+  white-space: nowrap;
+  margin-right: 1rem;
+}
 
-  nav[data-testid="test-user-social-links"] a {
-    font-size: 0.85rem;
-    padding: 0.35rem 0;
-    gap: 0.35rem;
-    white-space: nowrap;
-    margin-right: 1rem;
-  }
+/* Social + time sit together at the bottom in one row */
+.social-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* social left, time right */
+  width: 100%;
+  margin-top: auto;
+}
 
-  nav[data-testid="test-user-social-links"] a i {
-    font-size: 0.88rem;
-  }
-
-  .time-block {
-    margin-top: 0.85rem;
-    font-size: 0.82rem;
-    padding: 6px 14px;
-    width: fit-content;
-  }
-
+.time-block {
+  margin-top: 0;     /* row handles spacing */
+  font-size: 0.78rem;
+  padding: 5px 12px;
+  flex-shrink: 0;
+}
+  
   [data-testid="test-user-time"] { font-size: 0.8rem; }
 
   .card-right {
