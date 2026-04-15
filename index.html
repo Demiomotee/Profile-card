@@ -30,38 +30,49 @@
           <figcaption>Frontend wizard</figcaption>
         </figure>
 
-        
+        <!-- RIGHT SIDE OF TOP CARD ON MOBILE -->
         <div class="left-right-content">
-          <p class="connect-label">Connect</p>
-          <div class="social-time-row">
-            <nav data-testid="test-user-social-links" aria-label="Social media links">
-              <ul>
-                <li>
-                  <a data-testid="test-user-social-twitter" href="https://x.com/demiomotee"
-                     target="_blank" rel="noopener noreferrer" aria-label="Omotola on Twitter / X">
-                    <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>Twitter / x
-                  </a>
-                </li>
-                <li>
-                  <a data-testid="test-user-social-github" href="https://github.com/Demiomotee"
-                     target="_blank" rel="noopener noreferrer" aria-label="Omotola on GitHub">
-                    <i class="fa-brands fa-github" aria-hidden="true"></i>Github
-                  </a>
-                </li>
-                <li>
-                  <a data-testid="test-user-social-linkedin"
-                     href="https://www.linkedin.com/in/oluwademilade-omotola-b7a963230"
-                     target="_blank" rel="noopener noreferrer" aria-label="Omotola on LinkedIn">
-                    <i class="fa-brands fa-linkedin" aria-hidden="true"></i>Linkedin
-                  </a>
-                </li>
-              </ul>
-            </nav>
-            <div class="time-block">
-              <i class="fa-regular fa-clock" aria-hidden="true"></i>
-              <span data-testid="test-user-time" id="epoch-time"
-                    aria-live="polite" aria-atomic="true">—</span>
-            </div>
+          <nav data-testid="test-user-social-links" aria-label="Social media links">
+            <p class="connect-label">Connect</p>
+            <ul>
+              <li>
+                <a data-testid="test-user-social-twitter"
+                   href="https://x.com/demiomotee"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Omotola on Twitter / X">
+                  <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+                  Twitter / x
+                </a>
+              </li>
+              <li>
+                <a data-testid="test-user-social-github"
+                   href="https://github.com/Demiomotee"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Omotola on GitHub">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                  Github
+                </a>
+              </li>
+              <li>
+                <a data-testid="test-user-social-linkedin"
+                   href="https://www.linkedin.com/in/oluwademilade-omotola-b7a963230"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Omotola on LinkedIn">
+                  <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                  Linkedin
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="time-block">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+            <span
+              data-testid="test-user-time"
+              id="epoch-time"
+              aria-live="polite"
+              aria-atomic="true"
+            >—</span>
           </div>
         </div>
       </aside>
@@ -74,23 +85,21 @@
           <span class="role-tag">Software Developer &nbsp;·&nbsp; Student</span>
         </header>
 
-      <section class="about-section" aria-label="About me">
-        <h2 class="section-heading">About me</h2>
-         <div data-testid="test-user-bio" class="bio-wrap">
-         <p class="bio-text">
-         Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX.
-          <span class="bio-extra" id="bio-extra">
-          I enjoy turning ideas into usable products. I'm naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.
-         </span>
-       </p>
-    <button
-      class="see-more-btn"
-      id="see-more-btn"
-      aria-expanded="false"
-      aria-controls="bio-extra"
-    >See more</button>
-  </div>
-</section>
+        <section class="about-section" aria-label="About me">
+          <h2 class="section-heading">About me</h2>
+          <p data-testid="test-user-bio" class="bio-text">
+            Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX.<span
+              class="bio-extra"
+              id="bio-extra"
+              aria-hidden="true"
+            > I enjoy turning ideas into usable products. I'm naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.</span><button
+              class="see-more-btn"
+              id="see-more-btn"
+              aria-expanded="false"
+              aria-controls="bio-extra"
+            > See more</button>
+          </p>
+        </section>
 
         <div class="list-grid">
           <section aria-labelledby="interests-heading">
@@ -159,15 +168,16 @@
       applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
     });
 
+    /* ── SEE MORE / SEE LESS ── */
     const seeMoreBtn = document.getElementById("see-more-btn");
-    const bioText    = document.querySelector(".bio-text");
-    
+    const bioExtra   = document.getElementById("bio-extra");
+
     seeMoreBtn.addEventListener("click", () => {
-      const isOpen = bioText.classList.toggle("expanded");
+      const isOpen = bioExtra.classList.toggle("visible");
+      bioExtra.setAttribute("aria-hidden", isOpen ? "false" : "true");
       seeMoreBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      seeMoreBtn.textContent = isOpen ? "See less" : "See more";
+      seeMoreBtn.textContent = isOpen ? " See less" : " See more";
     });
-    
   </script>
 
 </body>
