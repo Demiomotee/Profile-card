@@ -19,7 +19,6 @@
 
       <!-- LEFT PANEL -->
       <aside class="card-left">
-
         <figure class="avatar-figure">
           <div class="avatar-wrap">
             <img
@@ -31,54 +30,55 @@
           <figcaption>Frontend wizard</figcaption>
         </figure>
 
-        <nav data-testid="test-user-social-links" aria-label="Social media links">
-          <p class="connect-label">Connect</p>
-          <ul>
-            <li>
-              <a data-testid="test-user-social-twitter"
-                 href="https://x.com/demiomotee"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Omotola on Twitter / X">
-                <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
-                Twitter / x
-              </a>
-            </li>
-            <li>
-              <a data-testid="test-user-social-github"
-                 href="https://github.com/Demiomotee"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Omotola on GitHub">
-                <i class="fa-brands fa-github" aria-hidden="true"></i>
-                Github
-              </a>
-            </li>
-            <li>
-              <a data-testid="test-user-social-linkedin"
-                 href="https://www.linkedin.com/in/oluwademilade-omotola-b7a963230"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Omotola on LinkedIn">
-                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                Linkedin
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <!-- RIGHT SIDE OF TOP CARD ON MOBILE -->
+        <div class="left-right-content">
+          <nav data-testid="test-user-social-links" aria-label="Social media links">
+            <p class="connect-label">Connect</p>
+            <ul>
+              <li>
+                <a data-testid="test-user-social-twitter"
+                   href="https://x.com/demiomotee"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Omotola on Twitter / X">
+                  <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+                  Twitter / x
+                </a>
+              </li>
+              <li>
+                <a data-testid="test-user-social-github"
+                   href="https://github.com/Demiomotee"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Omotola on GitHub">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                  Github
+                </a>
+              </li>
+              <li>
+                <a data-testid="test-user-social-linkedin"
+                   href="https://www.linkedin.com/in/oluwademilade-omotola-b7a963230"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Omotola on LinkedIn">
+                  <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                  Linkedin
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-        <div class="time-block">
-          <i class="fa-regular fa-clock" aria-hidden="true"></i>
-          <span
-            data-testid="test-user-time"
-            id="epoch-time"
-            aria-live="polite"
-            aria-atomic="true"
-          >—</span>
+          <div class="time-block">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+            <span
+              data-testid="test-user-time"
+              id="epoch-time"
+              aria-live="polite"
+              aria-atomic="true"
+            >—</span>
+          </div>
         </div>
-
       </aside>
 
       <!-- RIGHT PANEL -->
       <div class="card-right">
-
         <header class="card-header">
           <p class="profile-eyebrow">Profile</p>
           <h1 data-testid="test-user-name">Omotola Oluwademilade</h1>
@@ -88,11 +88,11 @@
         <section class="about-section" aria-label="About me">
           <h2 class="section-heading">About me</h2>
           <p data-testid="test-user-bio" class="bio-text">
-            Building digital products that are simple, useful and actually enjoyable to use. I’m a product-focused developer with a strong eye for UI/UX and clean scalable code...<span
+            Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX...<span
               class="bio-extra"
               id="bio-extra"
               aria-hidden="true"
-            > I enjoy turning ideas into usable products. I’m naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.</span><button
+            > I enjoy turning ideas into usable products. I'm naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.</span><button
               class="see-more-btn"
               id="see-more-btn"
               aria-expanded="false"
@@ -124,22 +124,17 @@
             </ul>
           </section>
         </div>
-
       </div>
+
     </div>
   </article>
 
-  <!-- ALL JS INLINE — no external file needed -->
   <script>
     "use strict";
 
     /* ── EPOCH TIME ── */
     const timeEl = document.getElementById("epoch-time");
-
-    const tick = () => {
-      timeEl.textContent = Date.now();
-    };
-
+    const tick = () => { timeEl.textContent = Date.now(); };
     tick();
     setInterval(tick, 500);
 
@@ -151,9 +146,8 @@
 
     const applyTheme = (t) => {
       html.setAttribute("data-theme", t);
-
       if (t === "dark") {
-        themeIcon.className = "fa-solid fa-circle-half-stroke";
+        themeIcon.className    = "fa-solid fa-sun";
         themeLabel.textContent = "Light";
         toggleBtn.setAttribute("aria-label", "Switch to light mode");
       } else {
@@ -161,21 +155,14 @@
         themeLabel.textContent = "Dark";
         toggleBtn.setAttribute("aria-label", "Switch to dark mode");
       }
-
       try { localStorage.setItem("pc-theme", t); } catch (_) {}
     };
 
-    /* Startup: saved preference → system preference → light */
     let saved = null;
     try { saved = localStorage.getItem("pc-theme"); } catch (_) {}
-
-    if (saved === "dark" || saved === "light") {
-      applyTheme(saved);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      applyTheme("dark");
-    } else {
-      applyTheme("light");
-    }
+    if (saved === "dark" || saved === "light") { applyTheme(saved); }
+    else if (window.matchMedia("(prefers-color-scheme: dark)").matches) { applyTheme("dark"); }
+    else { applyTheme("light"); }
 
     toggleBtn.addEventListener("click", () => {
       applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
@@ -187,7 +174,6 @@
 
     seeMoreBtn.addEventListener("click", () => {
       const isOpen = bioExtra.classList.toggle("visible");
-
       bioExtra.setAttribute("aria-hidden", isOpen ? "false" : "true");
       seeMoreBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
       seeMoreBtn.textContent = isOpen ? " See less" : " See more";
