@@ -318,6 +318,12 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   font-weight: 600;
 }
 
+.bio-text.expanded {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+}
+
 .bio-extra {
   display: none;
 }
