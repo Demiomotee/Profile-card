@@ -1,8 +1,8 @@
 /* ================================================
-   PROFILE CARD v2 — style.css
-   Matches screenshot: clean split card, blue accents
-   for Connect/Interests/Dislikes headings, Playfair
-   Display name, DM Sans body, epoch ms timer.
+   PROFILE CARD v3 — style.css
+   Font  : SF Pro (system stack)
+   Theme : light / dark via [data-theme] on <html>
+   Goal  : pixel-perfect match to screenshot
    ================================================ */
 
 *, *::before, *::after {
@@ -11,159 +11,142 @@
   padding: 0;
 }
 
-/* ── Tokens ──────────────────────────────────────── */
+/* ── SF Pro system font stack ─────────────────── */
 :root {
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
-  --font-mono:    'Courier New', Courier, monospace;
+  --sf: -apple-system, "SF Pro Display", "SF Pro Text",
+        BlinkMacSystemFont, "Helvetica Neue", Helvetica,
+        Arial, sans-serif;
 }
 
-/* Light */
+/* ── Light tokens (default — matches screenshot) ─ */
 [data-theme="light"] {
-  --page-bg:        #eceef1;
-  --card-bg:        #ffffff;
-  --left-bg:        #f7f7f8;
-  --left-border:    #ebebeb;
+  --page-bg:       #e4e7eb;   /* exact grey background in screenshot */
+  --card-bg:       #ffffff;
+  --left-bg:       #f7f8f9;   /* very slightly off-white left panel */
+  --left-border:   #ebebeb;
 
-  --text-heading:   #0d0d0d;
-  --text-body:      #4a4a4a;
-  --text-muted:     #9a9a9a;
+  --text-name:     #0d0d0d;   /* near-black for the big name */
+  --text-heading:  #111111;   /* "ABOUT ME" */
+  --text-body:     #6b6b6b;   /* list items, bio */
+  --text-muted:    #aaaaaa;   /* "Frontend wizard", "PROFILE" eyebrow */
+  --text-social:   #3a3a3a;   /* social link default colour */
 
-  --border:         #ebebeb;
+  --blue:          #2563eb;   /* CONNECT label, INTERESTS, DISLIKES, See more, hover */
+  --blue-underline:#2563eb;
 
-  --blue:           #3b72f2;   /* matches screenshot blue for section titles + links */
-  --blue-hover-bg:  rgba(59,114,242,0.07);
-  --blue-underline: rgba(59,114,242,0.4);
+  --dot:           #c5c5c5;   /* list bullet dots */
 
-  --tag-bg:         #f0f1f3;
-  --tag-border:     #e2e2e2;
-  --tag-text:       #5a5a5a;
+  --tag-bg:        #f0f1f3;
+  --tag-border:    #e3e3e3;
+  --tag-text:      #5a5a5a;
 
-  --dot-interest:   #3b72f2;
-  --dot-dislike:    #ef4444;
+  --toggle-bg:     #ffffff;
+  --toggle-border: #dde0e4;
+  --toggle-text:   #1a1a1a;
 
-  --toggle-bg:      #ffffff;
-  --toggle-border:  #e0e0e0;
-  --toggle-text:    #1a1a1a;
+  --divider:       #eeeeee;
 
-  --time-bg:        #f7f7f8;
-  --time-text:      #3b72f2;
-
-  --shadow-card:    0 4px 32px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.04);
-  --shadow-toggle:  0 2px 12px rgba(0,0,0,0.10);
+  --shadow:        0 2px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
 }
 
-/* Dark */
+/* ── Dark tokens ──────────────────────────────── */
 [data-theme="dark"] {
-  --page-bg:        #111111;
-  --card-bg:        #1c1c1e;
-  --left-bg:        #161618;
-  --left-border:    #2a2a2c;
+  --page-bg:       #111113;
+  --card-bg:       #1c1c1e;
+  --left-bg:       #161618;
+  --left-border:   #2a2a2c;
 
-  --text-heading:   #f2f2f7;
-  --text-body:      #9a9a9f;
-  --text-muted:     #555558;
+  --text-name:     #f2f2f7;
+  --text-heading:  #f2f2f7;
+  --text-body:     #8e8e93;
+  --text-muted:    #555558;
+  --text-social:   #aeaeb2;
 
-  --border:         #2c2c2e;
+  --blue:          #4f8ef7;
+  --blue-underline:#4f8ef7;
 
-  --blue:           #5b8df5;
-  --blue-hover-bg:  rgba(91,141,245,0.10);
-  --blue-underline: rgba(91,141,245,0.35);
+  --dot:           #48484a;
 
-  --tag-bg:         #242426;
-  --tag-border:     #333336;
-  --tag-text:       #888890;
+  --tag-bg:        #2c2c2e;
+  --tag-border:    #3a3a3c;
+  --tag-text:      #8e8e93;
 
-  --dot-interest:   #5b8df5;
-  --dot-dislike:    #f87171;
+  --toggle-bg:     #2c2c2e;
+  --toggle-border: #3a3a3c;
+  --toggle-text:   #f2f2f7;
 
-  --toggle-bg:      #2c2c2e;
-  --toggle-border:  #3a3a3c;
-  --toggle-text:    #f2f2f7;
+  --divider:       #2c2c2e;
 
-  --time-bg:        #1e1e20;
-  --time-text:      #5b8df5;
-
-  --shadow-card:    0 4px 32px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3);
-  --shadow-toggle:  0 2px 12px rgba(0,0,0,0.4);
+  --shadow:        0 2px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3);
 }
 
-/* ── Base ────────────────────────────────────────── */
+/* ── Base ─────────────────────────────────────── */
 body {
-  font-family: var(--font-body);
+  font-family: var(--sf);
   background: var(--page-bg);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 5rem 1.25rem 2.5rem;
-  transition: background 0.25s ease;
-  color: var(--text-body);
+  transition: background 0.22s ease;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ── Theme Toggle ────────────────────────────────── */
+/* ── Theme toggle — matches screenshot exactly ── */
 .theme-toggle {
   position: fixed;
-  top: 18px;
-  right: 18px;
-  z-index: 200;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
   background: var(--toggle-bg);
   color: var(--toggle-text);
   border: 1px solid var(--toggle-border);
-  border-radius: 99px;
+  border-radius: 999px;
   padding: 9px 18px;
-  font-family: var(--font-body);
+  font-family: var(--sf);
   font-size: 0.82rem;
   font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: var(--shadow-toggle);
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
 }
 
-.theme-toggle:hover {
-  background: var(--tag-bg);
-}
-
+.theme-toggle:hover       { background: var(--tag-bg); }
 .theme-toggle:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 3px;
 }
 
-/* ── Card ────────────────────────────────────────── */
+/* ── Card ─────────────────────────────────────── */
 article[data-testid="test-profile-card"] {
   width: 100%;
-  max-width: 820px;
+  max-width: 800px;
   background: var(--card-bg);
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: var(--shadow-card);
-  transition: background 0.25s, box-shadow 0.25s;
-  animation: card-in 0.4s cubic-bezier(.22,1,.36,1) both;
-}
-
-@keyframes card-in {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  box-shadow: var(--shadow);
+  transition: background 0.22s, box-shadow 0.22s;
 }
 
 .card-inner {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  min-height: 480px;
+  grid-template-columns: 210px 1fr;
 }
 
-/* ── Left Panel ──────────────────────────────────── */
+/* ── Left panel ───────────────────────────────── */
 .card-left {
   background: var(--left-bg);
   border-right: 1px solid var(--left-border);
-  padding: 2.25rem 1.5rem 1.75rem;
+  padding: 2.5rem 1.5rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  transition: background 0.25s, border-color 0.25s;
+  gap: 0;                 /* spacing handled per-child */
+  min-height: 480px;
+  transition: background 0.22s, border-color 0.22s;
 }
 
 /* Avatar */
@@ -171,21 +154,25 @@ article[data-testid="test-profile-card"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.65rem;
-  margin: 0;
+  gap: 0.6rem;
+  margin: 0 0 2rem 0;
 }
 
-.avatar-ring {
-  width: 110px;
-  height: 110px;
+.avatar-wrap {
+  width: 108px;
+  height: 108px;
   border-radius: 50%;
-  /* matches screenshot: thick dark ring */
-  border: 3px solid var(--text-heading);
   overflow: hidden;
-  transition: border-color 0.25s;
+  /* dark thick ring as seen in screenshot */
+  box-shadow: 0 0 0 3px #2a2a2a;
+  flex-shrink: 0;
 }
 
-.avatar-ring img[data-testid="test-user-avatar"] {
+[data-theme="dark"] .avatar-wrap {
+  box-shadow: 0 0 0 3px #555;
+}
+
+.avatar-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -196,41 +183,46 @@ article[data-testid="test-profile-card"] {
 figcaption {
   font-size: 0.78rem;
   color: var(--text-muted);
-  letter-spacing: 0.01em;
   text-align: center;
-  transition: color 0.25s;
+  letter-spacing: 0.01em;
+  transition: color 0.22s;
 }
 
-/* Section eyebrow label (CONNECT) */
-.section-eyebrow {
+/* CONNECT label */
+.connect-label {
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--blue);
-  margin-bottom: 0.5rem;
-  transition: color 0.25s;
+  margin-bottom: 0.55rem;
+  transition: color 0.22s;
 }
 
-/* Social nav */
+/* Social links */
+nav[data-testid="test-user-social-links"] {
+  margin-bottom: auto;   /* push time-block to bottom */
+}
+
 nav[data-testid="test-user-social-links"] ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0;
 }
 
 nav[data-testid="test-user-social-links"] a {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  color: var(--text-body);
+  color: var(--text-social);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.855rem;
   font-weight: 400;
-  padding: 0.38rem 0.5rem;
-  border-radius: 6px;
-  transition: background 0.15s, color 0.15s;
+  padding: 0.42rem 0.3rem;
+  border-radius: 5px;
+  transition: color 0.14s, background 0.14s;
+  -webkit-font-smoothing: antialiased;
 }
 
 nav[data-testid="test-user-social-links"] a i {
@@ -238,14 +230,13 @@ nav[data-testid="test-user-social-links"] a i {
   width: 16px;
   text-align: center;
   flex-shrink: 0;
-  color: var(--text-muted);
-  transition: color 0.15s;
+  color: inherit;
+  opacity: 0.75;
 }
 
-/* Hover: blue text + underline, matches screenshot */
+/* Hover — blue text + underline, exactly as shown for Twitter/X */
 nav[data-testid="test-user-social-links"] a:hover,
 nav[data-testid="test-user-social-links"] a:focus-visible {
-  background: var(--blue-hover-bg);
   color: var(--blue);
   text-decoration: underline;
   text-decoration-color: var(--blue-underline);
@@ -254,7 +245,7 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
 
 nav[data-testid="test-user-social-links"] a:hover i,
 nav[data-testid="test-user-social-links"] a:focus-visible i {
-  color: var(--blue);
+  opacity: 1;
 }
 
 nav[data-testid="test-user-social-links"] a:focus-visible {
@@ -262,212 +253,194 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   outline-offset: 1px;
 }
 
-/* Epoch time — bottom of left panel */
+/* Clock + epoch time — bottom left */
 .time-block {
-  margin-top: auto;
-}
-
-.time-inner {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: var(--time-bg);
-  border-radius: 8px;
-  padding: 0.45rem 0.7rem;
-  transition: background 0.25s;
+  gap: 0.45rem;
+  margin-top: 2.5rem;
+  color: var(--blue);
+  font-size: 0.82rem;
+  font-weight: 400;
+  font-family: var(--sf);
+  transition: color 0.22s;
 }
 
-.time-icon {
-  font-size: 0.8rem;
-  color: var(--blue);
+.time-block .fa-clock {
+  font-size: 0.85rem;
   flex-shrink: 0;
 }
 
 [data-testid="test-user-time"] {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: var(--text-body);
-  letter-spacing: 0.03em;
-  transition: color 0.25s;
-  /* prevent layout shift as number grows */
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
 }
 
-/* ── Right Panel ─────────────────────────────────── */
+/* ── Right panel ──────────────────────────────── */
 .card-right {
-  padding: 2.25rem 2.25rem 2rem;
+  padding: 2.25rem 2.5rem 2.25rem 2.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0;
 }
 
 /* Header */
 .card-header {
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 1.1rem;
-  transition: border-color 0.25s;
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.22s;
 }
 
-.eyebrow {
+/* "PROFILE" eyebrow */
+.profile-eyebrow {
   font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 0.35rem;
-  transition: color 0.25s;
+  margin-bottom: 0.3rem;
+  transition: color 0.22s;
 }
 
+/* Big name — Playfair-weight feel but using SF Pro here */
 [data-testid="test-user-name"] {
-  font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 2.05rem;
   font-weight: 700;
   line-height: 1.1;
-  color: var(--text-heading);
-  letter-spacing: -0.02em;
-  transition: color 0.25s;
+  color: var(--text-name);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.6rem;
+  transition: color 0.22s;
 }
 
+/* Role pill */
 .role-tag {
   display: inline-block;
-  margin-top: 0.6rem;
   background: var(--tag-bg);
   border: 1px solid var(--tag-border);
   color: var(--tag-text);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
+  font-weight: 400;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   padding: 0.22rem 0.85rem;
-  border-radius: 99px;
-  transition: background 0.25s, border-color 0.25s, color 0.25s;
+  border-radius: 999px;
+  transition: background 0.22s, border-color 0.22s, color 0.22s;
 }
 
-/* Bio section */
-.bio-section {}
+/* About me section */
+.about-section {
+  margin-bottom: 1.75rem;
+}
 
-.section-title {
-  font-size: 0.72rem;
+/* "ABOUT ME" heading — bold black, uppercase, exactly as screenshot */
+.section-heading {
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 0.5rem;
-  transition: color 0.25s;
+  color: var(--text-heading);
+  margin-bottom: 0.55rem;
+  transition: color 0.22s;
 }
 
-.section-title.dislike-title {
-  /* same blue in both columns, matches screenshot */
-  color: var(--blue);
-}
-
+/* Bio paragraph */
 .bio-text {
   font-size: 0.9rem;
   line-height: 1.75;
   color: var(--text-body);
   font-weight: 300;
-  transition: color 0.25s;
+  transition: color 0.22s;
 }
 
 .bio-text strong {
   color: var(--text-heading);
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* bio-extra: hidden by default, shown when expanded */
+/* Extra bio — hidden by default, inline when revealed */
 .bio-extra {
   display: none;
 }
-
 .bio-extra.visible {
   display: inline;
 }
 
-/* See more button */
+/* "See more" — inline blue text, no box, no chevron — exactly as screenshot */
 .see-more-btn {
+  display: inline;
   background: none;
   border: none;
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--blue);
   padding: 0;
-  margin-top: 0.15rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: opacity 0.15s;
+  margin-left: 0.15em;
+  font-family: var(--sf);
+  font-size: 0.9rem;       /* same size as bio text */
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--blue);
+  cursor: pointer;
   text-decoration: none;
+  transition: opacity 0.14s;
+  -webkit-font-smoothing: antialiased;
 }
 
-.see-more-btn:hover {
-  opacity: 0.75;
-}
-
+.see-more-btn:hover       { text-decoration: underline; }
 .see-more-btn:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
-.see-more-btn i {
-  font-size: 0.65rem;
-  transition: transform 0.25s;
-}
-
-.see-more-btn.open i {
-  transform: rotate(180deg);
-}
-
-/* Interests + Dislikes grid */
+/* Interests + Dislikes side-by-side */
 .list-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  margin-top: 0.25rem;
+  gap: 0 2rem;
 }
 
-[data-testid="test-user-hobbies"] ul,
-[data-testid="test-user-dislikes"] ul {
+/* "INTERESTS" / "DISLIKES" headings — blue uppercase, exactly as screenshot */
+.list-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.7rem;
+  transition: color 0.22s;
+}
+
+/* List items */
+[data-testid="test-user-hobbies"],
+[data-testid="test-user-dislikes"] {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
 }
 
 [data-testid="test-user-hobbies"] li,
 [data-testid="test-user-dislikes"] li {
-  font-size: 0.875rem;
-  color: var(--text-body);
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  transition: color 0.25s;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-body);
+  padding: 0.22rem 0;
+  transition: color 0.22s;
 }
 
-/* Bullet dots */
-[data-testid="test-user-hobbies"] li::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--dot-interest);
-  flex-shrink: 0;
-  transition: background 0.25s;
-}
-
+/* Small grey dot — exactly as screenshot (no colour difference between columns) */
+[data-testid="test-user-hobbies"] li::before,
 [data-testid="test-user-dislikes"] li::before {
   content: '';
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--dot-dislike);
+  background: var(--dot);
   flex-shrink: 0;
-  transition: background 0.25s;
+  transition: background 0.22s;
 }
 
-/* ── Global focus ────────────────────────────────── */
+/* ── Global focus ─────────────────────────────── */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--blue);
@@ -475,10 +448,10 @@ button:focus-visible {
   border-radius: 4px;
 }
 
-/* ── Responsive ──────────────────────────────────── */
+/* ── Responsive ───────────────────────────────── */
 @media (max-width: 620px) {
   body {
-    padding: 4.5rem 1rem 2rem;
+    padding: 4.5rem 0.75rem 2rem;
     align-items: flex-start;
   }
 
@@ -490,49 +463,40 @@ button:focus-visible {
     border-right: none;
     border-bottom: 1px solid var(--left-border);
     padding: 1.75rem 1.5rem;
+    min-height: unset;
     gap: 1.5rem;
   }
 
   .avatar-figure {
     flex-direction: row;
-    align-items: center;
     gap: 1rem;
+    margin-bottom: 0;
   }
 
-  .avatar-ring {
-    width: 72px;
-    height: 72px;
-    flex-shrink: 0;
-  }
-
-  figcaption { text-align: left; }
+  .avatar-wrap { width: 72px; height: 72px; }
+  figcaption   { text-align: left; }
 
   nav[data-testid="test-user-social-links"] ul {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 0.25rem;
+    gap: 0.1rem 0.5rem;
   }
 
   .time-block { margin-top: 0; }
 
-  .card-right {
-    padding: 1.5rem;
-    gap: 1.25rem;
-  }
+  .card-right { padding: 1.5rem; }
 
   [data-testid="test-user-name"] { font-size: 1.5rem; }
+
+  .list-grid { gap: 1.25rem; }
 }
 
 @media (min-width: 621px) and (max-width: 780px) {
-  .card-inner { grid-template-columns: 190px 1fr; }
-  .avatar-ring { width: 90px; height: 90px; }
-  [data-testid="test-user-name"] { font-size: 1.6rem; }
-  .card-right { padding: 1.75rem; }
+  .card-inner { grid-template-columns: 180px 1fr; }
+  .avatar-wrap { width: 88px; height: 88px; }
+  [data-testid="test-user-name"] { font-size: 1.65rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .profile-card, * {
-    animation: none !important;
-    transition-duration: 0.01ms !important;
-  }
+  * { transition-duration: 0.01ms !important; }
 }
