@@ -1,195 +1,44 @@
-.left-right-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --font-family: 'Arial', sans-serif;
+  --font-size-base: 16px;
+  --font-size-large: 24px;
+  --font-size-small: 12px;
 }
 
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  background-color: #f4f4f4;
+}
 
-@media (max-width: 620px) {
-  body {
-    padding: 4.5rem 1rem 1.5rem;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0;
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--font-family);
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
   }
-
-  article[data-testid="test-profile-card"] {
-    border-radius: 20px;
-    width: 100%;
-  }
-
-  /* BREAK the side-by-side grid — stack the two panels as separate visual blocks */
-  .card-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  /* ── TOP CARD (left panel) ── */
-  .card-left {
-    background: var(--left-bg);
-    border-right: none;
-    border-bottom: none;
-    border-radius: 20px 20px 0 0;
-    padding: 1.75rem 1.5rem 1.5rem;
-
-    /* avatar on left, connect+time on right */
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 1.25rem;
-  }
-
-  /* Avatar column — stays left, fixed width */
-  .avatar-figure {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
-    margin-bottom: 0;
-    width: 130px;
-  }
-
-  .avatar-wrap {
-    width: 130px;
-    height: 130px;
-  }
-
-  figcaption {
-    font-size: 0.78rem;
-    text-align: center;
-  }
-
-  /* Right side of top card — connect label + horizontal links + time pill */
-  .left-right-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding-top: 0.5rem;
-  }
-
-  /* CONNECT label */
-  .connect-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    margin-bottom: 0.6rem;
-  }
-
-  /* Social links: horizontal row on mobile */
-  nav[data-testid="test-user-social-links"] {
-    margin-bottom: 0;
-  }
-
-  nav[data-testid="test-user-social-links"] ul {
-    flex-direction: row;         /* horizontal */
-    flex-wrap: nowrap;
-    gap: 0;
-    align-items: center;
-  }
-
-  nav[data-testid="test-user-social-links"] li {
-    flex-shrink: 0;
-  }
-
-  nav[data-testid="test-user-social-links"] a {
-    font-size: 0.85rem;
-    padding: 0.35rem 0.4rem 0.35rem 0;
-    gap: 0.35rem;
-    white-space: nowrap;
-    /* add spacing between items */
-    margin-right: 1rem;
-  }
-
-  /* Twitter is shown in hover/active blue + underline in screenshot */
-  nav[data-testid="test-user-social-links"] li:first-child a {
-    color: var(--blue);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  nav[data-testid="test-user-social-links"] a i {
-    font-size: 0.88rem;
-  }
-
-  /* Time pill — sits below the social row, aligned left */
-  .time-block {
-    margin-top: 0.85rem;
-    font-size: 0.82rem;
-    padding: 6px 14px;
-    width: fit-content;
-    align-self: flex-start;
-  }
-
-  [data-testid="test-user-time"] {
-    font-size: 0.8rem;
-  }
-
-  /* ── BOTTOM CARD (right panel) ── */
-  .card-right {
-    background: var(--card-bg);
-    border-radius: 0 0 20px 20px;
-    /* subtle top separator */
-    border-top: 1px solid var(--divider);
-    padding: 1.75rem 1.5rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .card-header {
-    padding-bottom: 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .profile-eyebrow {
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    margin-bottom: 0.3rem;
-  }
-
-  [data-testid="test-user-name"] {
-    font-size: 1.85rem;
-    letter-spacing: -0.025em;
-    margin-bottom: 0.6rem;
-  }
-
-  .role-tag {
-    font-size: 0.68rem;
-    padding: 0.22rem 0.85rem;
-  }
-
-  .about-section {
-    margin-bottom: 1.75rem;
-  }
-
-  .section-heading {
-    font-size: 0.78rem;
-    margin-bottom: 0.55rem;
-  }
-
-  .bio-text {
-    font-size: 0.9rem;
-    line-height: 1.75;
-  }
-
-  .see-more-btn {
-    font-size: 0.9rem;
-  }
-
-  .list-heading {
-    font-size: 0.72rem;
-    margin-bottom: 0.7rem;
-  }
-
-  [data-testid="test-user-hobbies"] li,
-  [data-testid="test-user-dislikes"] li {
-    font-size: 0.875rem;
-    padding: 0.22rem 0;
-  }
-
-  .list-grid {
-    gap: 0 1.5rem;
+  .card {
+    padding: 15px;
   }
 }
