@@ -25,55 +25,53 @@
             <img
               data-testid="test-user-avatar"
               src="avatar.jpg"
-              alt="Omotola Oluwademilade — Software Developer and ICT Student at FUTA"
+              alt="Omotola Oluwademilade — Software Developer and ICT Student"
             />
           </div>
           <figcaption>Frontend wizard</figcaption>
         </figure>
 
-        <div class="left-bottom">
-          <nav data-testid="test-user-social-links" aria-label="Social media links">
-            <p class="connect-label">Connect</p>
-            <ul>
-              <li>
-                <a data-testid="test-user-social-twitter"
-                   href="https://x.com/demiomotee"
-                   target="_blank" rel="noopener noreferrer"
-                   aria-label="Omotola on Twitter / X">
-                  <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
-                  Twitter / X
-                </a>
-              </li>
-              <li>
-                <a data-testid="test-user-social-github"
-                   href="https://github.com/Demiomotee"
-                   target="_blank" rel="noopener noreferrer"
-                   aria-label="Omotola on GitHub">
-                  <i class="fa-brands fa-github" aria-hidden="true"></i>
-                  Github
-                </a>
-              </li>
-              <li>
-                <a data-testid="test-user-social-linkedin"
-                   href="https://www.linkedin.com/in/oluwademilade-omotola-b7a963230"
-                   target="_blank" rel="noopener noreferrer"
-                   aria-label="Omotola on LinkedIn">
-                  <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                  LinkedIn
-                </a>
-              </li>
-            </ul>
-          </nav>
+        <nav data-testid="test-user-social-links" aria-label="Social media links">
+          <p class="connect-label">Connect</p>
+          <ul>
+            <li>
+              <a data-testid="test-user-social-twitter"
+                 href="https://x.com/demiomotee"
+                 target="_blank" rel="noopener noreferrer"
+                 aria-label="Omotola on Twitter / X">
+                <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+                Twitter / x
+              </a>
+            </li>
+            <li>
+              <a data-testid="test-user-social-github"
+                 href="https://github.com/Demiomotee"
+                 target="_blank" rel="noopener noreferrer"
+                 aria-label="Omotola on GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+                Github
+              </a>
+            </li>
+            <li>
+              <a data-testid="test-user-social-linkedin"
+                 href="https://www.linkedin.com/in/oluwademilade-omotola-b7a963230"
+                 target="_blank" rel="noopener noreferrer"
+                 aria-label="Omotola on LinkedIn">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                Linkedin
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-          <div class="time-block" aria-label="Current epoch time in milliseconds">
-            <i class="fa-regular fa-clock" aria-hidden="true"></i>
-            <span
-              data-testid="test-user-time"
-              id="epoch-time"
-              aria-live="polite"
-              aria-atomic="true"
-            >—</span>
-          </div>
+        <div class="time-block">
+          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+          <span
+            data-testid="test-user-time"
+            id="epoch-time"
+            aria-live="polite"
+            aria-atomic="true"
+          >—</span>
         </div>
 
       </aside>
@@ -84,18 +82,17 @@
         <header class="card-header">
           <p class="profile-eyebrow">Profile</p>
           <h1 data-testid="test-user-name">Omotola Oluwademilade</h1>
-          <div class="role-tag">Software Developer &nbsp;·&nbsp; Student</div>
+          <span class="role-tag">Software Developer &nbsp;·&nbsp; Student</span>
         </header>
 
         <section class="about-section" aria-label="About me">
           <h2 class="section-heading">About me</h2>
           <p data-testid="test-user-bio" class="bio-text">
-            Building things that work and look good doing it.
-            ICT student at FUTA and indie dev with a passion for clean code and great UX...<span class="bio-extra" id="bio-extra" aria-hidden="true"> Currently crafting <strong>EduTrack</strong> — a school automation platform for
-              primary and secondary schools — and <strong>SoundCircle</strong>, a music community
-              app blending streaming, artist channels, and in-app ticketing. Deeply interested in
-              the intersection of technology and everyday Nigerian life, and always looking for
-              the next problem worth solving.</span><button
+            Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX...<span
+              class="bio-extra"
+              id="bio-extra"
+              aria-hidden="true"
+            > Currently crafting <strong>EduTrack</strong> — a school automation platform for primary and secondary schools — and <strong>SoundCircle</strong>, a music community app blending streaming, artist channels, and in-app ticketing. Deeply interested in the intersection of technology and everyday Nigerian life, and always looking for the next problem worth solving.</span><button
               class="see-more-btn"
               id="see-more-btn"
               aria-expanded="false"
@@ -132,6 +129,70 @@
     </div>
   </article>
 
-  <script src="script.js"></script>
+  <!-- ALL JS INLINE — no external file needed -->
+  <script>
+    "use strict";
+
+    /* ── EPOCH TIME ── */
+    const timeEl = document.getElementById("epoch-time");
+
+    const tick = () => {
+      timeEl.textContent = Date.now();
+    };
+
+    tick();
+    setInterval(tick, 500);
+
+    /* ── THEME TOGGLE ── */
+    const html       = document.documentElement;
+    const toggleBtn  = document.getElementById("theme-toggle");
+    const themeIcon  = document.getElementById("theme-icon");
+    const themeLabel = document.getElementById("theme-label");
+
+    const applyTheme = (t) => {
+      html.setAttribute("data-theme", t);
+
+      if (t === "dark") {
+        themeIcon.className    = "fa-solid fa-sun";
+        themeLabel.textContent = "Light";
+        toggleBtn.setAttribute("aria-label", "Switch to light mode");
+      } else {
+        themeIcon.className    = "fa-solid fa-moon";
+        themeLabel.textContent = "Dark";
+        toggleBtn.setAttribute("aria-label", "Switch to dark mode");
+      }
+
+      try { localStorage.setItem("pc-theme", t); } catch (_) {}
+    };
+
+    /* Startup: saved preference → system preference → light */
+    let saved = null;
+    try { saved = localStorage.getItem("pc-theme"); } catch (_) {}
+
+    if (saved === "dark" || saved === "light") {
+      applyTheme(saved);
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      applyTheme("dark");
+    } else {
+      applyTheme("light");
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
+    });
+
+    /* ── SEE MORE / SEE LESS ── */
+    const seeMoreBtn = document.getElementById("see-more-btn");
+    const bioExtra   = document.getElementById("bio-extra");
+
+    seeMoreBtn.addEventListener("click", () => {
+      const isOpen = bioExtra.classList.toggle("visible");
+
+      bioExtra.setAttribute("aria-hidden", isOpen ? "false" : "true");
+      seeMoreBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      seeMoreBtn.textContent = isOpen ? " See less" : " See more";
+    });
+  </script>
+
 </body>
 </html>
