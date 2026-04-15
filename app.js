@@ -1,68 +1,61 @@
-(function () {
-  "use strict";
+"use strict";
 
-  /* ── 1. EPOCH TIME ── */
-  var timeEl = document.getElementById("epoch-time");
+/* ── EPOCH TIME ── */
+const timeEl = document.getElementById("epoch-time");
 
-  function tick() {
-    if (timeEl) timeEl.textContent = Date.now();
-  }
+const tick = () => {
+  timeEl.textContent = Date.now();
+};
 
-  tick();
-  setInterval(tick, 500);
+tick();
+setInterval(tick, 500);
 
-  /* ── 2. THEME TOGGLE ── */
-  var html       = document.documentElement;
-  var toggleBtn  = document.getElementById("theme-toggle");
-  var themeIcon  = document.getElementById("theme-icon");
-  var themeLabel = document.getElementById("theme-label");
+/* ── THEME TOGGLE ── */
+const html       = document.documentElement;
+const toggleBtn  = document.getElementById("theme-toggle");
+const themeIcon  = document.getElementById("theme-icon");
+const themeLabel = document.getElementById("theme-label");
 
-  function applyTheme(t) {
-    html.setAttribute("data-theme", t);
+const applyTheme = (t) => {
+  html.setAttribute("data-theme", t);
 
-    if (t === "dark") {
-      themeIcon.className    = "fa-solid fa-sun";
-      themeLabel.textContent = "Light";
-      toggleBtn.setAttribute("aria-label", "Switch to light mode");
-    } else {
-      themeIcon.className    = "fa-solid fa-moon";
-      themeLabel.textContent = "Dark";
-      toggleBtn.setAttribute("aria-label", "Switch to dark mode");
-    }
-
-    try { localStorage.setItem("pc-theme", t); } catch (_) {}
-  }
-
-  /* Startup: saved → system → light */
-  var saved = null;
-  try { saved = localStorage.getItem("pc-theme"); } catch (_) {}
-
-  if (saved === "dark" || saved === "light") {
-    applyTheme(saved);
-  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    applyTheme("dark");
+  if (t === "dark") {
+    themeIcon.className    = "fa-solid fa-sun";
+    themeLabel.textContent = "Light";
+    toggleBtn.setAttribute("aria-label", "Switch to light mode");
   } else {
-    applyTheme("light");
+    themeIcon.className    = "fa-solid fa-moon";
+    themeLabel.textContent = "Dark";
+    toggleBtn.setAttribute("aria-label", "Switch to dark mode");
   }
 
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", function () {
-      applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
-    });
-  }
+  try { localStorage.setItem("pc-theme", t); } catch (_) {}
+};
 
-  /* ── 3. SEE MORE / SEE LESS ── */
-  var btn      = document.getElementById("see-more-btn");
-  var bioExtra = document.getElementById("bio-extra");
+/* Startup: saved preference → system preference → light */
+let saved = null;
+try { saved = localStorage.getItem("pc-theme"); } catch (_) {}
 
-  if (btn && bioExtra) {
-    btn.addEventListener("click", function () {
-      var isOpen = bioExtra.classList.toggle("visible");
+if (saved === "dark" || saved === "light") {
+  applyTheme(saved);
+} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  applyTheme("dark");
+} else {
+  applyTheme("light");
+}
 
-      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      bioExtra.setAttribute("aria-hidden", isOpen ? "false" : "true");
-      btn.textContent = isOpen ? " See less" : " See more";
-    });
-  }
+toggleBtn.addEventListener("click", () => {
+  applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
+});
 
-}());
+/* ── SEE MORE / SEE LESS ── */
+const seeMoreBtn = document.getElementById("see-more-btn");
+const bioExtra   = document.getElementById("bio-extra");
+
+seeMoreBtn.addEventListener("click", () => {
+  const isOpen = bioExtra.classList.toggle("visible");
+
+  bioExtra.setAttribute("aria-hidden", isOpen ? "false" : "true");
+  seeMoreBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  seeMoreBtn.textContent = isOpen ? " See less" : " See more";
+});
