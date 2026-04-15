@@ -223,7 +223,6 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   border-radius: 4px;
 }
 
-/* Time block — pill at bottom of left panel */
 .time-block {
   display: inline-flex;
   align-items: center;
