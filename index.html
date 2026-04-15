@@ -9,13 +9,11 @@
 </head>
 <body>
 
-  <!-- Theme Toggle -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
     <i id="theme-icon" class="fa-solid fa-moon" aria-hidden="true"></i>
     <span id="theme-label">Dark</span>
   </button>
 
-  <!-- Card -->
   <article data-testid="test-profile-card" aria-label="User profile card">
     <div class="card-inner">
 
@@ -33,48 +31,49 @@
           <figcaption>Frontend wizard</figcaption>
         </figure>
 
-        <nav data-testid="test-user-social-links" aria-label="Social media links">
-          <p class="connect-label">Connect</p>
-          <ul>
-            <li>
-              <a data-testid="test-user-social-twitter"
-                 href="https://x.com/demiomotee"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Omotola on Twitter / X">
-                <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
-                Twitter / X
-              </a>
-            </li>
-            <li>
-              <a data-testid="test-user-social-github"
-                 href="https://github.com/Demiomotee"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Omotola on GitHub">
-                <i class="fa-brands fa-github" aria-hidden="true"></i>
-                Github
-              </a>
-            </li>
-            <li>
-              <a data-testid="test-user-social-linkedin"
-                 href="https://www.linkedin.com/in/oluwademilade-omotola-b7a963230"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Omotola on LinkedIn">
-                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                Linkedin
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <div class="left-bottom">
+          <nav data-testid="test-user-social-links" aria-label="Social media links">
+            <p class="connect-label">Connect</p>
+            <ul>
+              <li>
+                <a data-testid="test-user-social-twitter"
+                   href="https://x.com/demiomotee"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Omotola on Twitter / X">
+                  <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+                  Twitter / X
+                </a>
+              </li>
+              <li>
+                <a data-testid="test-user-social-github"
+                   href="https://github.com/Demiomotee"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Omotola on GitHub">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                  Github
+                </a>
+              </li>
+              <li>
+                <a data-testid="test-user-social-linkedin"
+                   href="https://www.linkedin.com/in/oluwademilade-omotola-b7a963230"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Omotola on LinkedIn">
+                  <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-        <!-- Clock / Epoch time at bottom of left panel -->
-        <div class="time-block">
-          <i class="fa-regular fa-clock" aria-hidden="true"></i>
-          <span
-            data-testid="test-user-time"
-            id="epoch-time"
-            aria-live="polite"
-            aria-atomic="true"
-          >—</span>
+          <div class="time-block" aria-label="Current epoch time in milliseconds">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+            <span
+              data-testid="test-user-time"
+              id="epoch-time"
+              aria-live="polite"
+              aria-atomic="true"
+            >—</span>
+          </div>
         </div>
 
       </aside>
@@ -92,20 +91,16 @@
           <h2 class="section-heading">About me</h2>
           <p data-testid="test-user-bio" class="bio-text">
             Building things that work and look good doing it.
-            ICT student at FUTA and indie dev with a passion for clean code and great UX...<!--
-            --><span class="bio-extra" id="bio-extra" aria-hidden="true">
-              Currently crafting <strong>EduTrack</strong> — a school automation platform for
+            ICT student at FUTA and indie dev with a passion for clean code and great UX...<span class="bio-extra" id="bio-extra" aria-hidden="true"> Currently crafting <strong>EduTrack</strong> — a school automation platform for
               primary and secondary schools — and <strong>SoundCircle</strong>, a music community
               app blending streaming, artist channels, and in-app ticketing. Deeply interested in
               the intersection of technology and everyday Nigerian life, and always looking for
-              the next problem worth solving.
-            </span><!--
-            --><button
+              the next problem worth solving.</span><button
               class="see-more-btn"
               id="see-more-btn"
               aria-expanded="false"
               aria-controls="bio-extra"
-            >See more</button>
+            > See more</button>
           </p>
         </section>
 
