@@ -303,7 +303,19 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
 .bio-wrap {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.35rem;
+}
+
+.bio-content {
+  max-height: 4.5em;
+  overflow: hidden;
+  opacity: 0.9;
+  transition: max-height 0.5s ease, opacity 0.35s ease;
+}
+
+.bio-content.expanded {
+  max-height: 500px;
+  opacity: 1;
 }
 
 .bio-text {
@@ -311,16 +323,7 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   line-height: 1.75;
   color: var(--text-body);
   font-weight: 300;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.bio-text.expanded {
-  -webkit-line-clamp: unset;
-  display: block;
+  margin: 0;
 }
 
 .see-more-btn {
@@ -338,7 +341,6 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
 .see-more-btn:hover {
   text-decoration: underline;
 }
-
 .list-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
