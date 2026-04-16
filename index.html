@@ -87,20 +87,14 @@
         
           <div class="bio-wrap">
           
-            <div class="bio-content" id="bio-content">
-              <p class="bio-text">
-                Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX. I enjoy turning ideas into usable products. I'm naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.
-              </p>
+            <p class="bio-text" id="bio-text">
+              Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX. I enjoy turning ideas into usable products.
+            </p>
           
-              <button
-                class="see-more-btn"
-                id="see-more-btn"
-                aria-expanded="false">
-                See more
-              </button>
+            <button class="see-more-btn" id="see-more-btn">
+              See more
+            </button>
           
-            </div>
-            
           </div>
         </section>
 
@@ -174,12 +168,24 @@
     });
     
     const btn = document.getElementById("see-more-btn");
-    const bio = document.getElementById("bio-content");
+    const bio = document.getElementById("bio-text");
+    
+    let expanded = false;
     
     btn.addEventListener("click", () => {
-      const open = bio.classList.toggle("expanded");
-      btn.textContent = open ? "See less" : "See more";
-      btn.setAttribute("aria-expanded", open);
+      expanded = !expanded;
+    
+      if (expanded) {
+        bio.style.whiteSpace = "normal";
+        bio.style.overflow = "visible";
+        bio.style.textOverflow = "unset";
+        btn.textContent = "See less";
+      } else {
+        bio.style.whiteSpace = "nowrap";
+        bio.style.overflow = "hidden";
+        bio.style.textOverflow = "ellipsis";
+        btn.textContent = "See more";
+      }
     });
   </script>
 
