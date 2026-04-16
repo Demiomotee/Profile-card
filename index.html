@@ -173,14 +173,13 @@
       applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
     });
     
-    const seeMoreBtn = document.getElementById("see-more-btn");
-    const bioContent = document.getElementById("bio-content");
+    const btn = document.getElementById("see-more-btn");
+    const bio = document.getElementById("bio-content");
     
-    seeMoreBtn.addEventListener("click", () => {
-      const isOpen = bioContent.classList.toggle("expanded");
-    
-      seeMoreBtn.setAttribute("aria-expanded", isOpen);
-      seeMoreBtn.textContent = isOpen ? "See less" : "See more";
+    btn.addEventListener("click", () => {
+      const open = bio.classList.toggle("expanded");
+      btn.textContent = open ? "See less" : "See more";
+      btn.setAttribute("aria-expanded", open);
     });
   </script>
 
