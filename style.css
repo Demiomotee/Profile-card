@@ -301,11 +301,9 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
 }
 
 .bio-wrap {
-  position: relative;
-}
-
-.bio-content {
-  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
 }
 
 .bio-text {
@@ -314,31 +312,26 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   color: var(--text-body);
   font-weight: 300;
 
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
   overflow: hidden;
-}
+  text-overflow: ellipsis;
 
-.bio-content.expanded .bio-text {
-  -webkit-line-clamp: unset;
-  display: block;
+  flex: 1;
+  min-width: 0;
 }
 
 .see-more-btn {
-  position: absolute;
-  right: 0;
-  bottom: 0.15rem;
-
-  background: var(--card-bg);
-  padding-left: 6px;
-
+  background: none;
   border: none;
   font-family: var(--sf);
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--blue);
   cursor: pointer;
+
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 0;
 }
 
 .see-more-btn:hover {
