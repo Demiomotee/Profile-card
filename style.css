@@ -303,7 +303,10 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
 .bio-wrap {
   display: flex;
   flex-direction: column;
-  gap: 0;
+}
+
+.bio-wrap {
+  display: inline;
 }
 
 .bio-text {
@@ -311,7 +314,7 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   line-height: 1.75;
   color: var(--text-body);
   font-weight: 300;
-  transition: color 0.22s;
+  display: inline;
 }
 
 .bio-text strong {
@@ -332,33 +335,27 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   opacity: 1;
 }
 
-
 .bio-extra .bio-text {
   padding-top: 0.5rem;
+  display: block;
 }
 
 
 .see-more-btn {
-  display: inline-block;
+  display: inline;
   background: none;
   border: none;
-  padding: 0;
-  margin-top: 0.35rem;
+  margin-left: 6px;
   font-family: var(--sf);
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--blue);
   cursor: pointer;
-  text-align: left;
-  -webkit-font-smoothing: antialiased;
-  transition: opacity 0.14s;
+  white-space: nowrap;
 }
 
-.see-more-btn:hover         { text-decoration: underline; }
-.see-more-btn:focus-visible {
-  outline: 2px solid var(--blue);
-  outline-offset: 2px;
-  border-radius: 2px;
+.see-more-btn:hover {
+  text-decoration: underline;
 }
 
 
