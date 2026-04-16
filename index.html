@@ -86,23 +86,19 @@
           <h2 class="section-heading">About me</h2>
         
           <div class="bio-wrap">
-            <p data-testid="test-user-bio" class="bio-text">
-              Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX.
+        
+            <p data-testid="test-user-bio" class="bio-text" id="bio-text">
+              Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX. I enjoy turning ideas into usable products. I'm naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.
             </p>
         
             <button
               class="see-more-btn"
               id="see-more-btn"
               aria-expanded="false"
-              aria-controls="bio-extra">
+            >
               See more
             </button>
         
-            <div class="bio-extra" id="bio-extra" aria-hidden="true">
-              <p class="bio-text">
-                I enjoy turning ideas into usable products. I'm naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.
-              </p>
-            </div>
           </div>
         </section>
 
@@ -176,13 +172,14 @@
     });
 
     const seeMoreBtn = document.getElementById("see-more-btn");
-    const bioExtra   = document.getElementById("bio-extra");
-
+    const bioText = document.getElementById("bio-text");
+    
     seeMoreBtn.addEventListener("click", () => {
-      const isOpen = bioExtra.classList.toggle("visible");
-      bioExtra.setAttribute("aria-hidden", isOpen ? "false" : "true");
-      seeMoreBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      seeMoreBtn.textContent = isOpen ? "See less" : "See more";
+      const isExpanded = bioText.classList.toggle("expanded");
+    
+      seeMoreBtn.setAttribute("aria-expanded", isExpanded);
+    
+      seeMoreBtn.textContent = isExpanded ? "See less" : "See more";
     });
   </script>
 
