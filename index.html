@@ -87,15 +87,16 @@
         
           <div class="bio-wrap">
         
-            <p data-testid="test-user-bio" class="bio-text" id="bio-text">
-              Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX. I enjoy turning ideas into usable products. I'm naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.
-            </p>
+            <div class="bio-content" id="bio-content">
+              <p class="bio-text">
+                Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX. I enjoy turning ideas into usable products. I'm naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.
+              </p>
+            </div>
         
             <button
               class="see-more-btn"
               id="see-more-btn"
-              aria-expanded="false"
-            >
+              aria-expanded="false">
               See more
             </button>
         
@@ -170,16 +171,15 @@
     toggleBtn.addEventListener("click", () => {
       applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
     });
-
+    
     const seeMoreBtn = document.getElementById("see-more-btn");
-    const bioText = document.getElementById("bio-text");
+    const bioContent = document.getElementById("bio-content");
     
     seeMoreBtn.addEventListener("click", () => {
-      const isExpanded = bioText.classList.toggle("expanded");
+      const isOpen = bioContent.classList.toggle("expanded");
     
-      seeMoreBtn.setAttribute("aria-expanded", isExpanded);
-    
-      seeMoreBtn.textContent = isExpanded ? "See less" : "See more";
+      seeMoreBtn.setAttribute("aria-expanded", isOpen);
+      seeMoreBtn.textContent = isOpen ? "See less" : "See more";
     });
   </script>
 
