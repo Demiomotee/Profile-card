@@ -1,6 +1,5 @@
 "use strict";
 
-/* ── EPOCH TIME ── */
 const timeEl = document.getElementById("epoch-time");
 
 const tick = () => {
@@ -10,7 +9,7 @@ const tick = () => {
 tick();
 setInterval(tick, 500);
 
-/* ── THEME TOGGLE ── */
+
 const html       = document.documentElement;
 const toggleBtn  = document.getElementById("theme-toggle");
 const themeIcon  = document.getElementById("theme-icon");
@@ -32,7 +31,6 @@ const applyTheme = (t) => {
   try { localStorage.setItem("pc-theme", t); } catch (_) {}
 };
 
-/* Startup: saved preference → system preference → light */
 let saved = null;
 try { saved = localStorage.getItem("pc-theme"); } catch (_) {}
 
@@ -48,7 +46,7 @@ toggleBtn.addEventListener("click", () => {
   applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
 });
 
-/* ── SEE MORE / SEE LESS ── */
+
 const seeMoreBtn = document.getElementById("see-more-btn");
 const bioExtra   = document.getElementById("bio-extra");
 
