@@ -301,21 +301,11 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
 }
 
 .bio-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  position: relative;
 }
 
 .bio-content {
-  max-height: 4.5em;
-  overflow: hidden;
-  opacity: 0.9;
-  transition: max-height 0.5s ease, opacity 0.35s ease;
-}
-
-.bio-content.expanded {
-  max-height: 500px;
-  opacity: 1;
+  position: relative;
 }
 
 .bio-text {
@@ -323,24 +313,38 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   line-height: 1.75;
   color: var(--text-body);
   font-weight: 300;
-  margin: 0;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bio-content.expanded .bio-text {
+  -webkit-line-clamp: unset;
+  display: block;
 }
 
 .see-more-btn {
-  background: none;
+  position: absolute;
+  right: 0;
+  bottom: 0.15rem;
+
+  background: var(--card-bg);
+  padding-left: 6px;
+
   border: none;
   font-family: var(--sf);
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--blue);
   cursor: pointer;
-  width: fit-content;
-  padding: 0;
 }
 
 .see-more-btn:hover {
   text-decoration: underline;
 }
+
 .list-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
