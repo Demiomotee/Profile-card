@@ -302,8 +302,20 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
 
 .bio-wrap {
   display: flex;
-  align-items: baseline;
-  gap: 6px;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.bio-content {
+  max-height: 4.5em;
+  overflow: hidden;
+  opacity: 0.9;
+  transition: max-height 0.5s ease, opacity 0.35s ease;
+}
+
+.bio-content.expanded {
+  max-height: 500px;
+  opacity: 1;
 }
 
 .bio-text {
@@ -311,13 +323,7 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   line-height: 1.75;
   color: var(--text-body);
   font-weight: 300;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  flex: 1;
-  min-width: 0;
+  margin: 0;
 }
 
 .see-more-btn {
@@ -328,16 +334,13 @@ nav[data-testid="test-user-social-links"] a:focus-visible {
   font-weight: 500;
   color: var(--blue);
   cursor: pointer;
-
-  white-space: nowrap;
-  flex-shrink: 0;
+  width: fit-content;
   padding: 0;
 }
 
 .see-more-btn:hover {
   text-decoration: underline;
 }
-
 .list-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
