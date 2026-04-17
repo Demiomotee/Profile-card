@@ -87,14 +87,20 @@
         
           <div class="bio-wrap">
           
-            <p class="bio-text" id="bio-text">
-              Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX. I enjoy turning ideas into usable products.
-            </p>
+            <div class="bio-content" id="bio-content">
+              <p class="bio-text">
+                Building things that work and look good doing it. ICT student at FUTA and indie dev with a passion for clean code and great UX. I enjoy turning ideas into usable products. I'm naturally curious and detail-oriented, always ready to improve my craft and focus on small details that make digital experiences feel seamless and intuitive.
+              </p>
           
-            <button class="see-more-btn" id="see-more-btn">
-              See more
-            </button>
+              <button
+                class="see-more-btn"
+                id="see-more-btn"
+                aria-expanded="false">
+                See more
+              </button>
           
+            </div>
+            
           </div>
         </section>
 
@@ -167,25 +173,14 @@
       applyTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark");
     });
     
-    const btn = document.getElementById("see-more-btn");
-    const bio = document.getElementById("bio-text");
+    const seeMoreBtn = document.getElementById("see-more-btn");
+    const bioContent = document.getElementById("bio-content");
     
-    let expanded = false;
+    seeMoreBtn.addEventListener("click", () => {
+      const isOpen = bioContent.classList.toggle("expanded");
     
-    btn.addEventListener("click", () => {
-      expanded = !expanded;
-    
-      if (expanded) {
-        bio.style.whiteSpace = "normal";
-        bio.style.overflow = "visible";
-        bio.style.textOverflow = "unset";
-        btn.textContent = "See less";
-      } else {
-        bio.style.whiteSpace = "nowrap";
-        bio.style.overflow = "hidden";
-        bio.style.textOverflow = "ellipsis";
-        btn.textContent = "See more";
-      }
+      seeMoreBtn.setAttribute("aria-expanded", isOpen);
+      seeMoreBtn.textContent = isOpen ? "See less" : "See more";
     });
   </script>
 
